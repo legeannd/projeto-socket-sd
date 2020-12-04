@@ -1,5 +1,4 @@
 import socket
-import calcEstDesc as ced
 
 HOST = '127.0.0.1'  
 PORT = 65432
@@ -40,4 +39,6 @@ while True:
             elif(data.decode().lower() == 'mistake'):
                 print("Opção errada, escolha uma das opções listadas.")
             elif('resultado' in data.decode().lower()):
+                print("\n------------------ RESULTADO ------------------")
                 print(repr(data.decode()))        
+                print("\n")
