@@ -1,7 +1,7 @@
 PROJETO: CALCULADORA DE ESTATÍSTICA DESCRITIVA
 
 -- INSTRUÇÕES PARA FUNCIONAR O CÓDIGO:<br>
-    --- Para rodar o projeto é necessário ter instalado:<br>
+    -- Para rodar o projeto é necessário ter instalado:<br>
         -- Python 3<br>
         -- Biblioteca Matplotlib.pyplot<br>
         -- Biblioteca NumPy<br>
