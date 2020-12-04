@@ -2,10 +2,10 @@ import socket
 import calcEstDesc as ced
 
 HOST = '127.0.0.1'  
-PORT = 65433
+PORT = 65432
 
 def menu():
-    print("---- Calculadora Estatística Descritiva----")
+    print("\n---- Calculadora Estatística Descritiva----")
     print("---- Escolha uma opção:                    ")
     print("---- 1) Média      ")
     print("---- 2) Mediana    ")
@@ -13,6 +13,7 @@ def menu():
     print("---- 4) Variância")
     print("---- 5) Desvio Padrão")
     print("---- 6) Gráfico Distribuição De frequência")
+    print("---- 7) Sair\n")
 
     escolha = input()
 
@@ -23,8 +24,7 @@ while True:
         s.connect((HOST, PORT))  
         
         while True:      
-            data = s.recv(1024)
-            print(data)
+            data = s.recv(1024)            
 
             if(data.decode() == 'exit'):
                 s.close()
@@ -37,6 +37,7 @@ while True:
             elif(data.decode() == 'menu'):
                 escolha = menu()
                 s.sendall(escolha.encode())
-
-        
-    # print('Received:', repr(data.decode()))
+            elif(data.decode().lower() == 'mistake'):
+                print("Opção errada, escolha uma das opções listadas.")
+            elif('resultado' in data.decode().lower()):
+                print(repr(data.decode()))        

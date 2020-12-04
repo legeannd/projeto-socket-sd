@@ -3,13 +3,15 @@ import calcEstDesc as calc
 import utils
 
 HOST = '127.0.0.1'
-PORT = 65433
+PORT = 65432
 
 while True:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((HOST, PORT))
         s.listen()
         conn, addr = s.accept()
+        resultado = ""
+
         with conn:                       
             conn.sendall("digite".encode())
             dados = conn.recv(1024)                           
@@ -24,19 +26,24 @@ while True:
 
                 if(escolha == '1'):
                     media = calc.media(dados)
-                    print(media)
+                    resultado = "O resultado da média é: "+str(media)
+                    conn.sendall(resultado.encode())
                 elif(escolha == '2'):
                     mediana = calc.mediana(dados)
-                    print(mediana)                    
+                    resultado = "O resultado da mediana é: "+str(mediana)
+                    conn.sendall(resultado.encode())
                 elif(escolha == '3'):
                     moda = calc.moda(dados)
-                    print(moda)  
+                    resultado = "O resultado da moda é: "+str(moda)
+                    conn.sendall(resultado.encode())
                 elif(escolha == '4'):
                     variancia = calc.variancia(dados)
-                    print(variancia)  
+                    resultado = "O resultado da variância é: "+str(variancia)
+                    conn.sendall(resultado.encode()) 
                 elif(escolha == '5'):
                     desvioPadrao = calc.desvioPadrao(dados)
-                    print(desvioPadrao)  
+                    resultado = "O resultado da Desvio Padrão é: "+str(desvioPadrao)
+                    conn.sendall(resultado.encode())
                 elif(escolha == '6'):
                     calc.distribuicaoDeFrequencia(dados)
                 elif(escolha == '7'):
@@ -46,4 +53,4 @@ while True:
                     s.close()  
                     exit()            
                 else:
-                    print("Aqui nao porra")     
+                    conn.sendall("Mistake".encode())
